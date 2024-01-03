@@ -1,21 +1,47 @@
 <!doctype html>
+
+{% include 'navbar.html' %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Upload</title>
+    <style>
+        span {
+            font-weight: bold;
+        }
+
+        input {
+            margin: 10px 0;
+        }
+
+        .submit-btn {
+            width: 150px;
+        }
+    </style>
 </head>
 <body>
-    <form method="POST" action="/fms_app/" enctype="multipart/form-data">
+    {% block navbar %}
+    {% endblock %}
 
-        {% csrf_token %}
+    <div class="container mt-4">
+        {% if error %}
+            <h3>{{ error }}</h3>
+        {% endif %}
 
-        <input type="file" name="myFile">
-        <input type="submit" name="submit">
+        <h4>Upload the student records' file below</h4>
+        <p>Note: The file must strictly be in <span>.xlsx</span> format.</p>
 
+        <form method="POST" action="/fms_admin/" enctype="multipart/form-data">
 
-    </form>
+            {% csrf_token %}
+            <input type="file" name="myFile" id="customFile" /><br>
+            <input type="submit" name="submit" class="submit-btn"/>
+        </form>
+    </div>
 </body>
 </html>

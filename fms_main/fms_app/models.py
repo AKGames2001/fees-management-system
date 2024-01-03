@@ -27,3 +27,31 @@ class Post(models.Model):
 
 class FileUpload(models.Model):
     file = models.FileField(upload_to='pictures')
+
+
+class Fee(models.Model):
+    type_open = models.IntegerField()
+    type_obc = models.IntegerField(null=True)
+    type_obc_min = models.IntegerField(null=True)
+    type_vj = models.IntegerField(null=True)
+    type_vj_min = models.IntegerField(null=True)
+    type_nt = models.IntegerField(null=True)
+    type_nt_min = models.IntegerField(null=True)
+    type_sbc = models.IntegerField(null=True)
+    type_sbc_min = models.IntegerField(null=True)
+    type_sc = models.IntegerField(null=True)
+    type_st = models.IntegerField(null=True)
+    type_pwd = models.IntegerField(null=True)
+    type_rcsms = models.IntegerField(null=True)
+    type_ews = models.IntegerField(null=True)
+    type_sebc = models.IntegerField(null=True)
+    type_tfws = models.IntegerField(null=True)
+    type_jk = models.IntegerField(null=True)
+    type_ne = models.IntegerField(null=True)
+    type_pmsss = models.IntegerField(null=True)
+    type_ciwg = models.IntegerField(null=True)
+
+
+class Course(models.Model):
+    course_name = models.CharField(max_length=10)
+    fee_id = models.ForeignKey(Fee, on_delete=models.CASCADE)

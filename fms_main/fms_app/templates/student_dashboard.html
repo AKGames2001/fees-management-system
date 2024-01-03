@@ -1,0 +1,81 @@
+<!doctype html>
+
+{% include 'navbar.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Dashboard</title>
+    <style>
+          table {
+            border-collapse: collapse;
+            width: 100%;
+          }
+
+          th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+          }
+
+          th {
+            background-color: #f2f2f2;
+          }
+
+          tr:nth-child(even) {
+            background-color: #f9f9f9;
+          }
+
+          tr:hover {
+            background-color: #f1f1f1;
+          }
+        </style>
+</head>
+<body>
+    {% block navbar %}
+    {% endblock %}
+
+    <div class="container mt-4">
+        <h1>Welcome, {{ student_name }}</h1>
+    <p>Check your student details below:</p>
+        <table>
+            <tr>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>Course Name</th>
+                <th>Branch Name</th>
+                <th>Category Name</th>
+                <th>Seat Type</th>
+                <th>Fees Allotted</th>
+                <th>Fees Paid</th>
+                <th>Payment Status</th>
+                <th>Action</th>
+            </tr>
+
+            {% for x in studentData %}
+            <tr>
+                <td>{{ x.student_id }}</td>
+                <td>{{ x.first_name }} {{ x.last_name }}</td>
+                <td>{{ x.course_name }}</td>
+                <td>{{ x.branch_name }}</td>
+                <td>{{ x.category_name }}</td>
+                <td>{{ x.seat_type }}</td>
+                <td>{{ x.fees_allotted }}</td>
+                <td>{{ x.fees_paid }}</td>
+                <td>{{ x.payment_status }}</td>
+                {% if payment_status == 'Paid' %}
+                    <td><a href="https://www.example.com">Download receipt</a></td>
+                {% else %}
+                    <td><a href="https://www.example.com">Pay Now</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

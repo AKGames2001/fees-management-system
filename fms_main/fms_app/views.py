@@ -60,3 +60,7 @@ def student(request, *args, **kwargs):
         "studentData": studentData,
         'student_name': studentData[0]['first_name']
     })
+
+
+def error_handler(request):
+    return render(request, 'error404.html')

@@ -14,10 +14,17 @@ def login_student(request):
         student_id = request.POST['user']
         password = request.POST['password']
 
-        student = Student.objects.filter(student_id=student_id).values()[0]
+        if len(student_id) != 9 and not student_id.isnumeric():
+            return render(request, 'login.html', {
+                'error': 'wrong username or password',
+                'type': 'student',
+                'url': '/login_student/'
+            })
+
+        student = Student.objects.filter(student_id=student_id).values()
 
         if student:
-            if student['password'] == password:
+            if student[0]['password'] == password:
                 # request.session['student_id'] = student.student_id
                 query_string = urlencode({'student_id': student_id})
                 url = '/u/student/?{}'.format(query_string)
@@ -35,10 +42,10 @@ def login_admin(request):
         email = request.POST['user']
         password = request.POST['password']
 
-        admin = Admin.objects.filter(email=email).values()[0]
+        admin = Admin.objects.filter(email=email).values()
 
         if admin:
-            if admin['password'] == password:
+            if admin[0]['password'] == password:
                 # request.session['student_id'] = student.student_id
                 return redirect('/u/admin/')
         return render(request, 'login.html', {

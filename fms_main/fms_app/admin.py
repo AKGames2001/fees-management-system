@@ -1,12 +1,7 @@
 from django.contrib import admin
-from .models import Post, FileUpload
+from .models import Post
 from import_export.admin import ImportExportModelAdmin
 
-
-# Register your models here.
-
-# class AuthorAdmin(admin.ModelAdmin):
-#     list_display = ('student_id', 'first_name', 'last_name')
 
 @admin.register(Post)
 class PostAdmin(ImportExportModelAdmin):
@@ -24,6 +19,3 @@ class PostAdmin(ImportExportModelAdmin):
         'fees_paid',
         'payment_status'
     )
-
-
-# admin.site.register(Post)

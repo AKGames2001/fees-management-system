@@ -1,11 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Course, Fee
 from tablib import Dataset
 
 
 # Create your views here.
 
-def home(request):
+def admin(request):
+    studentData = Post.objects.all().values()
+    return render(request, 'index.html', {"studentData": studentData})
+
+
+def upload(request):
     if request.method == 'POST':
         dataset = Dataset()
         new_person = request.FILES['myFile']
@@ -44,25 +49,14 @@ def home(request):
                 payment_status,
             )
             value.save()
-        # return render(request, 'index.html')
-    studentData = Post.objects.all().values()
-    return render(request, 'index.html', {"studentData": studentData})
-
-
-def upload(request):
+        return redirect('/u/admin/')
     return render(request, 'upload.html')
 
 
-def student_login(request):
-    return render(request, 'student.html')
-
-
-def student(request):
-    if request.method == 'POST':
-        std_id = request.POST.get('student_id')
-        studentData = Post.objects.filter(student_id=std_id).values()
-        print(studentData[0])
-        return render(request, 'student_dashboard.html', {
-            "studentData": studentData,
-            'student_name': studentData[0]['first_name']
-        })
+def student(request, *args, **kwargs):
+    std_id = request.GET.get('student_id')
+    studentData = Post.objects.filter(student_id=std_id).values()
+    return render(request, 'student_dashboard.html', {
+        "studentData": studentData,
+        'student_name': studentData[0]['first_name']
+    })

@@ -36,7 +36,7 @@
         <h4>Upload the student records' file below</h4>
         <p>Note: The file must strictly be in <span>.xlsx</span> format.</p>
 
-        <form method="POST" action="/fms_admin/" enctype="multipart/form-data">
+        <form method="POST" action="../upload/" enctype="multipart/form-data">
 
             {% csrf_token %}
             <input type="file" name="myFile" id="customFile" /><br>

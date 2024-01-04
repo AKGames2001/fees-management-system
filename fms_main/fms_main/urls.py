@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('fms_app.urls', namespace="fms_app")),
+    path('', include('fms_auth.urls', namespace="fms_auth")),
+    path('u/', include('fms_app.urls', namespace="fms_app"))
 ]

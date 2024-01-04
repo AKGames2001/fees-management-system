@@ -6,14 +6,24 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>student</title>
+    <title>FMS - Login</title>
 </head>
 <body>
-    <form method="POST" action="fms_student/">
+    <form method="POST" action="{{ url }}">
 
         {% csrf_token %}
 
-        <input type="text" name="student_id">
+        {% if type == 'admin' %}
+        <label for="admin_email">Email: </label>
+        <input type="email" name="user" id="admin_email">
+        {% else %}
+        <label for="std_id">Student ID: </label>
+        <input type="text" name="user" id="std_id">
+        {% endif %}
+
+        <label for="pass">Password: </label>
+        <input type="password" name="password" id="pass">
+
         <input type="submit" name="submit">
     </form>
 </body>

@@ -6,8 +6,7 @@ from . import views
 app_name = 'fms_app'
 
 urlpatterns = [
-                  path('fms_admin/', views.home, name='homepage'),
+                  path('admin/', views.admin, name='admindashboard'),
                   path('upload/', views.upload, name='uplaodpage'),
-                  path('', views.student_login, name="loginpage"),
-                  path('fms_student/', views.student, name='studentdashboard')
+                  path('student/', views.student, name='studentdashboard')
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

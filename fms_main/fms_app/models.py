@@ -8,7 +8,7 @@ class Post(models.Model):
     course_name = models.CharField(max_length=100)
     branch_name = models.CharField(max_length=100)
     email = models.EmailField()
-    gender = models.CharField(max_length=6, choices=(("male", "Male"), ("female", "Female")))
+    gender = models.CharField(max_length=6, choices=(("M", "Male"), ("F", "Female")))
     category_name = models.CharField(max_length=10)
     seat_type = models.CharField(max_length=10)
     fees_allotted = models.IntegerField(null=True)
@@ -20,10 +20,6 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.student_id} - {self.first_name} {self.last_name}"
-
-
-class FileUpload(models.Model):
-    file = models.FileField(upload_to='pictures')
 
 
 class Fee(models.Model):

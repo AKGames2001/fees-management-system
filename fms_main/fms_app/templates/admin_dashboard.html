@@ -1,0 +1,59 @@
+<!doctype html>
+
+{% include 'common/header.html' %}
+{% include 'common/navbar.html' %}
+
+<html lang="en">
+
+{% block header %}
+<title>FMS-APP</title>
+{% endblock %}
+
+<body>
+    {% block navbar %}
+    {% endblock %}
+
+    <div class="container mt-4">
+        <div class="top-line">
+            <h2>Welcome to FMS, Admin_name</h2>
+            <a href="../upload/">Upload</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                    <th>Branch</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Category</th>
+                    <th>Seat type</th>
+                    <th>Fees Allotted</th>
+                    <th>Fees Pending</th>
+                    <th>Fee Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in studentData %}
+                <tr>
+                    <td>{{ x.student_id }}</td>
+                    <td>{{ x.first_name }} {{ x.last_name }}</td>
+                    <td>{{ x.course_name }}</td>
+                    <td>{{ x.branch_name }}</td>
+                    <td>{{ x.email }}</td>
+                    <td>{{ x.gender }}</td>
+                    <td>{{ x.category_name }}</td>
+                    <td>{{ x.seat_type }}</td>
+                    <td>{{ x.fees_allotted }}</td>
+                    <td>{{ x.fees_paid }}</td>
+                    <td>{{ x.payment_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

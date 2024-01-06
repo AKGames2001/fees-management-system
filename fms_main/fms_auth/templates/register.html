@@ -84,14 +84,14 @@
     <div class="login-container">
         <h4>
             {% if type == 'admin' %}
-            Admin Login
+                Admin Register
             {% else %}
-            Student Login
+                Student Register
             {% endif %}
         </h4>
 
         {% if error %}
-        <p class="error">{{ error }}</p>
+            <p class="error">{{ error }}</p>
         {% endif %}
 
         <form method="POST" action="{{ url }}">
@@ -100,16 +100,20 @@
             <div class="form-group">
 
                 {% if type == 'admin' %}
-                <label for="admin_email">Email: </label>
-                <input type="email" name="user" id="admin_email">
+                    <label for="admin_email">Email: </label>
+                    <input type="email" name="user" id="admin_email">
                 {% else %}
-                <label for="std_id">Student ID: </label>
-                <input type="text" name="user" id="std_id">
+                    <label for="std_id">Student ID: </label>
+                    <input type="text" name="user" id="std_id">
                 {% endif %}
             </div>
             <div class="form-group">
                 <label for="pass">Password: </label>
                 <input type="password" name="password" id="pass">
+            </div>
+            <div class="form-group">
+                <label for="conf_pass">Confirm Password: </label>
+                <input type="password" name="conf_pass" id="conf_pass">
             </div>
             <div class="form-group">
                 <input type="submit" name="submit">
@@ -120,10 +124,11 @@
             <p class="or-text">OR</p>
             <span></span>
         </div>
+
         {% if type == 'admin' %}
-            <a href="/register_admin/">Register</a>
+            <a href="/login_admin/">Login</a>
         {% else %}
-            <a href="/register_student/">Register</a>
+            <a href="/login_student/">Login</a>
         {% endif %}
     </div>
 

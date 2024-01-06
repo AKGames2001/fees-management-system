@@ -7,7 +7,7 @@ from tablib import Dataset
 
 def admin(request):
     studentData = Post.objects.all().values()
-    return render(request, 'index.html', {"studentData": studentData})
+    return render(request, 'admin_dashboard.html', {"studentData": studentData})
 
 
 def upload(request):
@@ -16,7 +16,7 @@ def upload(request):
         new_person = request.FILES['myFile']
 
         if not new_person.name.endswith('.xlsx'):
-            return render(request, 'upload.html', {'error': 'Wrong file extension'})
+            return render(request, 'admin_upload.html', {'error': 'Wrong file extension'})
 
         imported_data = dataset.load(new_person.read(), format='xlsx')
         for data in imported_data:
@@ -50,12 +50,17 @@ def upload(request):
             )
             value.save()
         return redirect('/u/admin/')
-    return render(request, 'upload.html')
+    return render(request, 'admin_upload.html')
 
 
 def student(request, *args, **kwargs):
     std_id = request.GET.get('student_id')
     studentData = Post.objects.filter(student_id=std_id).values()
+    if not studentData:
+        return render(request, 'student_dashboard.html', {
+            "studentData": None,
+            'student_name': 'New Student'
+        })
     return render(request, 'student_dashboard.html', {
         "studentData": studentData,
         'student_name': studentData[0]['first_name']

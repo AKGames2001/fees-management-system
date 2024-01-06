@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Post, Course, Fee
+from .models import Student, Course, Fee
 from tablib import Dataset
 
 
 # Create your views here.
 
 def admin(request):
-    studentData = Post.objects.all().values()
+    studentData = Student.objects.all().values()
     return render(request, 'admin_dashboard.html', {"studentData": studentData})
 
 
@@ -33,7 +33,7 @@ def upload(request):
             else:
                 payment_status = 'Pending'
 
-            value = Post(
+            value = Student(
                 data[0],
                 data[1],
                 data[2],
@@ -55,7 +55,7 @@ def upload(request):
 
 def student(request, *args, **kwargs):
     std_id = request.GET.get('student_id')
-    studentData = Post.objects.filter(student_id=std_id).values()
+    studentData = Student.objects.filter(student_id=std_id).values()
     if not studentData:
         return render(request, 'student_dashboard.html', {
             "studentData": None,

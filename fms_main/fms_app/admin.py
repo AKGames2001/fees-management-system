@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Post
+from .models import Student
 from import_export.admin import ImportExportModelAdmin
 
 
-@admin.register(Post)
+@admin.register(Student)
 class PostAdmin(ImportExportModelAdmin):
     list_display = (
         'student_id',
